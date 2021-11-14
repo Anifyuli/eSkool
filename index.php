@@ -108,7 +108,7 @@
     </section>
     <section class="">
         <div>
-          <h5 class="text-uppercase">Tentang eSkool</h5>
+          <h5>Tentang eSkool</h5>
 
           <ul class="list-unstyled mb-0">
             <li>
