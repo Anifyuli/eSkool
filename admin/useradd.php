@@ -18,7 +18,7 @@
     <h1 class="text-dark">Data pengguna</h1>
         <div class="card">
             <div class="card-header bg-success text-white">
-                Edit data <a class="btn btn-sm btn-primary float-right" href="./useradd.php"><span class="fas fa-user-plus"></span> Tambah</a>
+                Silahkan lengkapi data yang dibutuhkan
             </div>
             <div class="card-body">
                 <form action="" method="post" role="form">

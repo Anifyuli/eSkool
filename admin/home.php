@@ -25,29 +25,32 @@ include "../connect.php"
 </head>
 <body>
 
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-success">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
+  <a class="navbar-brand" href="#">eSkool Halaman Admin</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#pengguna">Pengguna</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
+      <li class="nav-item active">
+        <a class="nav-link" href="#buku">Buku</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled">Disabled</a>
+      <li class="nav-item active">
+        <a class="nav-link" href="#siswa">Siswa</a>
       </li>
     </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Cari" aria-label="Search">
+      <button class="btn btn-primary my-2 my-sm-0" type="submit">Cari</button>
+      <button class="btn btn-danger mx-2 my-2 my-sm-0" type="submit">Keluar</button>
+    </form>
   </div>
 </nav>
+
 <div class="container-fluid">
         <div class="mt-5 mx-3 p-2 my-3 bg-info text-light rounded-sm row">
             <div class="col">
@@ -59,12 +62,10 @@ include "../connect.php"
             </div>
         </div>
 
-        <div class="container-fluid my-5 mx-auto">
+        <div id="pengguna" class="container-fluid my-5 mx-auto">
             <h3 class="text-dark">Daftar Pengguna</h3>
             <div class="card">
                 <div class="card-header bg-success text-white">
-                    <!-- Pengguna <a href="useradd.php" class="btn btn-sm btn-primary float-right"><span class="fas fa-user-plus"></span> Tambah</a> -->
-                    <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
                     <span class="fas fa-user-plus"></span> Tambah
                     </button>
@@ -130,34 +131,45 @@ include "../connect.php"
             </div>
         </div>
         
-        <div class="container-fluid">
+        <div id="buku" class="container-fluid my-5 mx-auto">
             <h3>Data Buku</h3>
-            <div class="card-deck">
-                <?php
-                include ("connect.php");
-                $data = mysqli_query($conn, "SELECT * FROM buku") or die(mysqli_error($connect));
-                while($row = mysqli_fetch_assoc($data)) {
-                    $no = 1
-                    ?>
-                <div class="card">
-                    <img src="./assets/images/<?=$row['gambar']; ?>" class="card-img-top" >
-                    <div class="card-body">
-                    <h5 class="card-title"> <?=$no; ?> <br> <?= $row['judul']; ?></h5>
-                    <p class="card-text">
-                        Ditulis oleh <?= $row['pengarang']; ?> <br>
-                        Diterbitkan oleh <?= $row['penerbit']; ?>
-                    </p>
-                    </div>
-                    <?php $no++; } ?>
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    Buku <a href="./bukuadd.php" class="btn btn-sm btn-primary float-right"><span class="fas fa-plus"></span> Tambah</a>
+
+                </div>
+                <div class="card-body">
+                    <div class="card-deck">
+                        <?php
+                        include ("connect.php");
+                        $data = mysqli_query($conn, "SELECT * FROM buku") or die(mysqli_error($connect));
+                        while($row = mysqli_fetch_assoc($data)) {
+                            $no = 1
+                            ?>
+                        <div class="card">
+                            <img src="./assets/images/<?=$row['gambar']; ?>" class="card-img-top" >
+                            <div class="card-body">
+                            <h5 class="card-title"> <?=$no; ?> <br> <?= $row['judul']; ?></h5>
+                            <p class="card-text">
+                                Ditulis oleh <?= $row['pengarang']; ?> <br>
+                                Diterbitkan oleh <?= $row['penerbit']; ?>
+                                <a class="btn btn-sm btn-primary" href="./bukuadd.php?id<?= $row['id']; ?>">Tambah</a>
+                                <a class="btn btn-sm btn-primary" href="./bukudelete.php?id<?= $row['id']; ?>">Hapus</a>
+                            </p>
+                        </div>
+                        <?php $no++; } ?>
                 </div>
             </div>
         </div>
 
-        <div class="container-fluid my-5 mx-auto">
-            <h3 class="text-dark">Daftar Pengguna</h3>
+                </div>
+            </div>
+            
+        <div id="siswa" class="container-fluid my-5 mx-auto">
+            <h3 class="text-dark">Daftar Siswa</h3>
             <div class="card">
                 <div class="card-header bg-success text-white">
-                    Pengguna <a href="./tambah.php" class="btn btn-sm btn-primary float-right"><span class="fas fa-user-plus"></span> Tambah</a>
+                    Siswa <a href="./siswaadd.php" class="btn btn-sm btn-primary float-right"><span class="fas fa-user-plus"></span> Tambah</a>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered text-center">
